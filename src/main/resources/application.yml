@@ -1,0 +1,72 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  http-port: 8081
+  port: 443
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: 19890914
+    key-store-type: PKCS12
+    key-alias: oauth
+  #context-path: /springboot
+
+# DataSource
+spring:
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/oauth?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
+      username: root
+      password: root
+      filters: stat,wall,config
+      max-active: 100
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+  redis:
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器地址
+    host: localhost
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器连接密码（默认为空）
+    password:
+    # 连接超时时间（毫秒）
+    timeout: 200
+    lettuce:
+      pool:
+        ##连接池最大连接数（使用负值表示没有限制） 默认8
+        max-active: 100
+        ## 连接池中的最大空闲连接 默认8
+        max-idle: 50
+        ## 连接池中的最小空闲连接 默认0
+        min-idle: 5
+        ## 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: 3000
+
+#mybatis:
+#  mapper-locations: classpath:com/ojs/question_repository/mapper/xml/*.xml
+#  type-aliases-package: com.ojs.question_repository.mapper
+
+weixin:
+  appid: wxb92e4c8bab293927
+  secret: f902646958524ce5c21a08e6db575c76
+  grant_type: authorization_code
+  url_jscode2session: https://api.weixin.qq.com/sns/jscode2session
+
+enableRequestSign: false
