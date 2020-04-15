@@ -1,0 +1,12 @@
+@startuml
+MiniProgram -> MiniProgram: wx.login()=>code
+MiniProgram -> oauth_API_Server: code
+oauth_API_Server -> WeChat_Http_API: jscode2session(appid+secret+code)=>\n session_key,openid,userinfo
+WeChat_Http_API -> oauth_API_Server: session_key,openid,etc.
+oauth_API_Server -> oauth_API_Server: checkBindState(openid)=>\nisBind:true/false
+oauth_API_Server -> MiniProgram: openid,isBind:false,session_key
+MiniProgram -> MiniProgram: wx.getUserInfo(withCredentials:true)=>\n encryptedData,vi
+MiniProgram -> MiniProgram: decryptData(encryptedData,vi,session_key)=>\n userinfo
+MiniProgram -> oauth_API_Server: oauth(userid, password, openid, userinfo)
+oauth_API_Server -> MiniProgram: Authorization Login Success Response:\n isLogin:true,token,tokenCreateDate,tokenExpiryDate
+@enduml
