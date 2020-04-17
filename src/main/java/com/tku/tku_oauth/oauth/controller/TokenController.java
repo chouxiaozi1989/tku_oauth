@@ -92,7 +92,7 @@ public class TokenController {
 //        p.put("userid", "CY");
 //        p.put("password", "sa");
 //        signString = p.toJSONString() + "&sa" + "a14746ec-1092-47a1-bad3-7ff54dbaa41c" + timestamp + "A1scr6";
-        signString = "password=sa&userid=CY&sa" + "3d545600-4438-434a-b5e8-89e2a5f23bb9" + timestamp + "A1scr6";
+        signString = "password=c12e01f2a13ff5587e1e9e4aedb8242d&userid=CY&sa" + "aa94113b-e162-4915-a300-f4d1304c2a1f" + timestamp + "A1scr6";
         sign = MD5Util.encode(signString);
         System.out.println(sign);
     }

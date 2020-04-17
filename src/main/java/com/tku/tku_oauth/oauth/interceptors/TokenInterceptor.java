@@ -45,7 +45,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 
         // 2. 请求时间间隔
         long requestInterval = System.currentTimeMillis() - Long.parseLong(timestamp);
-        Assert.isTrue(requestInterval < expireTime, "请求超时，请重新请求");
+        //Assert.isTrue(requestInterval < expireTime, "请求超时，请重新请求");
 
         // 3. 校验Token是否存在
         ValueOperations<String, TokenInfo> tokenRedis = redisTemplate.opsForValue();

@@ -42,8 +42,8 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
     private String url_jscode2session;
 
     @Override
-    public UserInfo getUserById(String userid) {
-        return userMapper.getByUserId(userid, "1");
+    public UserInfo getUserById(String userId) {
+        return userMapper.getByUserId(userId, "1");
     }
 
     @Override

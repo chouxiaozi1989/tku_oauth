@@ -18,42 +18,42 @@ import java.util.Date;
 @Mapper
 @Repository
 public interface UserInfoMapper extends BaseMapper<UserInfo> {
-    @Select("select * from oauth.userinfo where userid=#{userid} and yxbz=#{yxbz}")
-    UserInfo getByUserId(String userid, String yxbz);
+    @Select("select * from oauth.user_info where user_id=#{user_id} and yxbz=#{yxbz}")
+    UserInfo getByUserId(String user_id, String yxbz);
 
-    @Select("select * from oauth.userinfo where openid=#{openid} and yxbz=#{yxbz}")
+    @Select("select * from oauth.user_info where openid=#{openid} and yxbz=#{yxbz}")
     UserInfo getByOpenId(String openid, String yxbz);
 
-    @Insert({"insert into oauth.userinfo(userid,username,yxbz) values(#{userid},#{username},'1')"})
-    void addUser(String userid, String username);
+    @Insert({"insert into oauth.user_info(user_id,user_name,yxbz) values(#{user_id},#{user_name},'1')"})
+    void addUser(String user_id, String username);
 
-    @Update({"update oauth.userinfo set openid=#{openid} where userid=#{userid}"})
-    void UpdateOpenid(String userid, String openid);
+    @Update({"update oauth.user_info set openid=#{openid} where user_id=#{user_id}"})
+    void UpdateOpenid(String user_id, String openid);
 
-    @Update({"update oauth.userinfo set gen=#{gen} where userid=#{userid}"})
-    void UpdateGen(int gen, String userid);
+    @Update({"update oauth.user_info set gen=#{gen} where user_id=#{user_id}"})
+    void UpdateGen(int gen, String user_id);
 
-    @Update({"update oauth.userinfo set country=#{country} where userid=#{userid}"})
-    void UpdateCountry(String country, String userid);
+    @Update({"update oauth.user_info set country=#{country} where user_id=#{user_id}"})
+    void UpdateCountry(String country, String user_id);
 
-    @Update({"update oauth.userinfo set province=#{province} where userid=#{userid}"})
-    void UpdateProvince(String province, String userid);
+    @Update({"update oauth.user_info set province=#{province} where user_id=#{user_id}"})
+    void UpdateProvince(String province, String user_id);
 
-    @Update({"update oauth.userinfo set city=#{city} where userid=#{userid}"})
-    void UpdateCity(String city, String userid);
+    @Update({"update oauth.user_info set city=#{city} where user_id=#{user_id}"})
+    void UpdateCity(String city, String user_id);
 
-    @Update({"update oauth.userinfo set birthday=#{birthday} where userid=#{userid}"})
-    void UpdateBirthday(Date birthday, String userid);
+    @Update({"update oauth.user_info set birthday=#{birthday} where user_id=#{user_id}"})
+    void UpdateBirthday(Date birthday, String user_id);
 
-    @Update({"update oauth.userinfo set username=#{username} where userid=#{userid}"})
-    void UpdateUserName(String username, String userid);
+    @Update({"update oauth.user_info set user_name=#{user_name} where user_id=#{user_id}"})
+    void UpdateUserName(String user_name, String user_id);
 
-    @Update({"update oauth.userinfo set email=#{email} where userid=#{userid}"})
-    void UpdateEmail(String email, String userid);
+    @Update({"update oauth.user_info set email=#{email} where user_id=#{user_id}"})
+    void UpdateEmail(String email, String user_id);
 
-    @Update({"update oauth.userinfo set avatarurl=#{avatarUrl} where userid=#{userid}"})
-    void UpdateAvatarUrl(String avatarUrl, String userid);
+    @Update({"update oauth.user_info set avatarUrl=#{avatarUrl} where user_id=#{user_id}"})
+    void UpdateAvatarUrl(String avatarUrl, String user_id);
 
-    @Delete("update oauth.userinfo set yxbz='0' where userid=#{userid}")
-    void delete(String userid);
+    @Delete("update oauth.user_info set yxbz='0' where user_id=#{user_id}")
+    void delete(String user_id);
 }

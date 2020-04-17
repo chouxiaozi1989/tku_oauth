@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 public interface AppInfoMapper extends BaseMapper<AppInfo> {
     @Select("select * from oauth.app_info where app_id=#{appid} and app_key=#{key} and yxbz='1'")
     @Results({@Result(column = "app_id", property = "appId"),
-            @Result(column = "app_key", property = "appkey"),
+            @Result(column = "app_key", property = "appKey"),
             @Result(column = "yxbz", property = "yxbz")})
     AppInfo getByAppidAndKey(String appid, String key);
 }
