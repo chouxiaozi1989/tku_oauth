@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2020-03-30
  */
 @Controller
-@RequestMapping("/api/UserInfo")
+@RequestMapping("/api/user")
 public class UserInfoController {
     @Autowired
     private RedisTemplate redisTemplate;
