@@ -47,7 +47,7 @@ public class ApiResponse<T> {
 
     private static <T> String signData(T data) {
         // TODO 查询key
-        String key = "123";
+//        String key = "123";
         Map<String, String> responseMap = null;
         try {
             responseMap = getFields(data);
@@ -55,7 +55,8 @@ public class ApiResponse<T> {
             return null;
         }
         String urlComponent = ApiUtil.concatSignString(responseMap);
-        String signature = urlComponent + "key=" + key;
+//        String signature = urlComponent + "key=" + key;
+        String signature = urlComponent;
         String sign = MD5Util.encode(signature);
         return sign;
     }
