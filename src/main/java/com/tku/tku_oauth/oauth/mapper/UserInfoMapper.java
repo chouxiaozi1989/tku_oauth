@@ -69,4 +69,15 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
     @Transactional(propagation = Propagation.REQUIRED)
     @Delete("update oauth.user_info set yxbz='0' where user_id=#{user_id}")
     void delete(String user_id);
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Insert({"insert into oauth.user_info(openid,user_id,user_name,gen,birthday,city,grade,yxbz)" +
+            " values(#{openid},#{user_id},#{userName},#{gen},#{birthday},#{city},#{grade},'1')"})
+    void addUserInfo(String openid, String user_id, String userName, String gen, String birthday, String city, String grade);
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Insert({"update oauth.user_info set user_name=#{userName},gen=#{gen},birthday=#{birthday} " +
+            ",city=#{city}, grade=#{grade} where openid=#{openid}"})
+    void updateUserInfo(String openid, String userName, String gen, String birthday, String city, String grade);
+
 }

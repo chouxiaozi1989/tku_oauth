@@ -15,7 +15,7 @@ import com.tku.tku_oauth.oauth.model.UserInfo;
 public interface IUserInfoService extends IService<UserInfo> {
     UserInfo getUserById(String userid);
 
-    UserInfo getUserByOpenId(String openid);
+    JSONObject getUserByOpenId(String openid);
 
     UserInfo login(String userid, String password);
 
@@ -24,4 +24,10 @@ public interface IUserInfoService extends IService<UserInfo> {
     JSONObject jscode2session(String code);
 
     UserInfo oauth(String userid, String password, String openid, JSONObject userinfo);
+
+    void addUser(String userid,String userName );
+
+    JSONObject addUserInfo(JSONObject jsonUser);
+
+    JSONObject updateUserInfo(JSONObject jsonUser);
 }

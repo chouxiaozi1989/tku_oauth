@@ -3,6 +3,7 @@ package com.tku.tku_oauth.oauth.model;
 import com.tku.tku_oauth.oauth.utils.ApiCodeEnum;
 import com.tku.tku_oauth.oauth.utils.ApiUtil;
 import com.tku.tku_oauth.oauth.utils.MD5Util;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +34,34 @@ public class ApiResponse<T> {
 
     public static ApiResponse error(String code, String msg) {
         return response(code, msg, null);
+    }
+
+    public ApiResult ApiResponse(String code, String msg) {
+        return result;
+    }
+
+    public ApiResult getResult() {
+        return result;
+    }
+
+    public void setResult(ApiResult result) {
+        this.result = result;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
     }
 
     public static <T> ApiResponse response(String code, String msg, T data) {

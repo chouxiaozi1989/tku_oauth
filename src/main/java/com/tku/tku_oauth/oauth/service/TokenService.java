@@ -10,5 +10,7 @@ import org.springframework.stereotype.Service;
 public interface TokenService {
     public AccessToken saveToken(int tokenType, AppInfo appInfo, UserInfo userInfo);
 
+    public AccessToken saveToken(int tokenType, UserInfo userInfo);
+
     public TokenInfo getTokenInfo(String token);
 }

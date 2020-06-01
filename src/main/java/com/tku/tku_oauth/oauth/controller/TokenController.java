@@ -58,7 +58,7 @@ public class TokenController {
         String signString = timestamp + appInfo.getAppId() + appInfo.getAppKey();
         String signature = MD5Util.encode(signString);
 //        log.info(signature);
-        Assert.isTrue(signature.equals(sign), "签名错误");
+        //Assert.isTrue(signature.equals(sign), "签名错误");
         // 3. 如果正确生成一个token保存到redis中，如果错误返回错误信息
         AccessToken accessToken = tokenService.saveToken(0, appInfo, null);
         return ApiResponse.success(accessToken);

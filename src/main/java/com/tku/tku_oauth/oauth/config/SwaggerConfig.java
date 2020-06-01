@@ -18,13 +18,17 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .pathMapping("/")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.nvn.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.tku.tku_oauth.oauth.controller"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(new ApiInfoBuilder()
-                        .title("SpringBoot整合Swagger")
-                        .description("SpringBoot整合Swagger，详细信息......")
-                        .version("9.0")
-                        .contact(new Contact("啊啊啊啊", "blog.csdn.net", "aaa@gmail.com"))
+                        //页面标题
+                        .title("Spring Boot 使用 Swagger2 构建RESTful API")
+                        //创建人
+                        .contact(new Contact("oauth", "", ""))
+                        //版本号
+                        .version("1.0")
+                        //描述
+                        .description("API 描述")
                         .license("The Apache License")
                         .licenseUrl("http://www.baidu.com")
                         .build());
