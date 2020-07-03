@@ -75,6 +75,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
                     errortext = "用户不存在";
                 } else {
                     resJson = userInfo.toJSON();
+                    redisTemplate.opsForValue().set("emp" + openid, resJson, 7200, TimeUnit.SECONDS);
                 }
             } else {
                 resJson = jsonUser;
@@ -86,23 +87,6 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         resJson.put("errorcode",errorcode);
         resJson.put("errortext",errortext);
         return resJson;
-    }
-
-    @Override
-    public UserInfo login(String userid, String password) {
-        UserInfo userInfo = userMapper.getByUserId(userid, "1");
-        //verify password
-        if (password.equals(userInfo.getPassword())) {
-            return userInfo;
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void UpdateOpenid(String userid, String openid) {
-        userMapper.UpdateOpenid(userid, openid);
     }
 
     @Override
@@ -166,13 +150,6 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void addUser(String userid, String userName) {
-        userMapper.addUser(userid, userName);
-    }
-
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
     @Cacheable()
     public JSONObject addUserInfo(JSONObject jsonUser) {
         Date date = new Date();
@@ -195,7 +172,10 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
                 String birthday  =  jsonUser.getString("birthday");
                 String city  =  jsonUser.getString("city");
                 String grade  =  jsonUser.getString("grade");
-                userMapper.addUserInfo(openid,userid, userName,gen,birthday,city,grade);
+                String avatarUrl  =  jsonUser.getString("avatarUrl");
+                String country  =  jsonUser.getString("country");
+                String province  =  jsonUser.getString("province");
+                userMapper.addUserInfo(openid,userid, userName,gen,birthday,city,grade,avatarUrl,country,province);
                 redisTemplate.opsForValue().set("emp" + openid, jsonUser, 7200, TimeUnit.SECONDS);
             } catch (Exception e){
                 res.put("errorcode","1");
@@ -230,7 +210,24 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
                 String birthday  =  jsonUser.getString("birthday");
                 String city  =  jsonUser.getString("city");
                 String grade  =  jsonUser.getString("grade");
-                userMapper.updateUserInfo(openid, userName,gen,birthday,city,grade);
+                String avatarUrl  =  jsonUser.getString("avatarUrl");
+                String country  =  jsonUser.getString("country");
+                String province  =  jsonUser.getString("province");
+                if (jsonUser.containsKey("birthday") == true) {
+                    userMapper.UpdateBirthday(birthday,openid);
+                }
+                if (jsonUser.containsKey("city") == true) {
+                    userMapper.UpdateCity(city,openid);
+                }
+                if (jsonUser.containsKey("avatarUrl") == true) {
+                    userMapper.UpdateAvatarUrl(avatarUrl,openid);
+                }
+                if (jsonUser.containsKey("grade") == true) {
+                    userMapper.UpdateGrade(grade,openid);
+                }
+
+
+                userMapper.updateUserInfo(openid, userName,gen,country,province);
                 redisTemplate.delete("emp" + openid);
                 jsonUserR = getUserByOpenId(openid);
                 redisTemplate.opsForValue().set("emp" + openid,jsonUserR,7200,TimeUnit.SECONDS);

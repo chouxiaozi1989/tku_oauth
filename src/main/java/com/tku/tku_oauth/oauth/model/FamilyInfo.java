@@ -19,13 +19,11 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class FamilyInfo implements Serializable {
 
-    private Integer familyId;
-
-    private Integer userid;
-
     private String openid;
 
-    private String familyName;
+    private String userName;
+
+    private String avatar;
 
 
 }

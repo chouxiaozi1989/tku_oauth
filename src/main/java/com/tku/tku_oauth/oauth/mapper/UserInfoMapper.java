@@ -39,6 +39,10 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
     void UpdateGen(int gen, String user_id);
 
     @Transactional(propagation = Propagation.REQUIRED)
+    @Update({"update oauth.user_info set gen=#{gen} where user_id=#{user_id}"})
+    void UpdateGrade(String grade, String user_id);
+
+    @Transactional(propagation = Propagation.REQUIRED)
     @Update({"update oauth.user_info set country=#{country} where user_id=#{user_id}"})
     void UpdateCountry(String country, String user_id);
 
@@ -52,7 +56,7 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Update({"update oauth.user_info set birthday=#{birthday} where user_id=#{user_id}"})
-    void UpdateBirthday(Date birthday, String user_id);
+    void UpdateBirthday(String birthday, String user_id);
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Update({"update oauth.user_info set user_name=#{user_name} where user_id=#{user_id}"})
@@ -71,13 +75,12 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
     void delete(String user_id);
 
     @Transactional(propagation = Propagation.REQUIRED)
-    @Insert({"insert into oauth.user_info(openid,user_id,user_name,gen,birthday,city,grade,yxbz)" +
-            " values(#{openid},#{user_id},#{userName},#{gen},#{birthday},#{city},#{grade},'1')"})
-    void addUserInfo(String openid, String user_id, String userName, String gen, String birthday, String city, String grade);
+    @Insert({"insert into oauth.user_info(openid,user_id,user_name,gen,birthday,city,grade,yxbz,avatarUrl,country, province)" +
+            " values(#{openid},#{user_id},#{userName},#{gen},#{birthday},#{city},#{grade},'1',#{avatarUrl},#{country},#{province})"})
+    void addUserInfo(String openid, String user_id, String userName, String gen, String birthday, String city, String grade,String avatarUrl,String country,String province );
 
     @Transactional(propagation = Propagation.REQUIRED)
-    @Insert({"update oauth.user_info set user_name=#{userName},gen=#{gen},birthday=#{birthday} " +
-            ",city=#{city}, grade=#{grade} where openid=#{openid}"})
-    void updateUserInfo(String openid, String userName, String gen, String birthday, String city, String grade);
+    @Update({"update oauth.user_info set user_name=#{userName},gen=#{gen},country=#{country},province=#{province} where openid=#{openid}"})
+    void updateUserInfo(String openid, String userName, String gen,String country,String province);
 
 }

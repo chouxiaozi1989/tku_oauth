@@ -17,15 +17,10 @@ public interface IUserInfoService extends IService<UserInfo> {
 
     JSONObject getUserByOpenId(String openid);
 
-    UserInfo login(String userid, String password);
-
-    void UpdateOpenid(String userid, String openid);
 
     JSONObject jscode2session(String code);
 
     UserInfo oauth(String userid, String password, String openid, JSONObject userinfo);
-
-    void addUser(String userid,String userName );
 
     JSONObject addUserInfo(JSONObject jsonUser);
 
